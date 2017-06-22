@@ -1,0 +1,170 @@
+<ul class="nav nav-pills">
+    <li role="presentation"><a href="/">Home</a></li>
+    <li role="presentation" class="active"><a href="#">Patients</a></li>
+    <li role="presentation"><a href="#">Products</a></li>
+</ul>
+
+<section class="insert">
+    <form action="/patient/insert" method="post">
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading">
+                <h1 class="panel-title">Create a new Patient</h1>
+            </div>
+
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Patient Name</td>
+                    <td>
+                        <input type="text" class="form-control" id="PatientName" name="PatientName">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Custom Membership ID</td>
+                    <td>
+                        <input type="text" class="form-control" id="CustomMembershipID" name="CustomMembershipID">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Custom Barcode</td>
+                    <td>
+                        <input type="text" class="form-control" id="CustomBarcode" name="CustomBarcode">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Registry Number</td>
+                    <td>
+                        <input type="text" class="form-control" id="RegistryNumber" name="RegistryNumber">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Caregiver Name</td>
+                    <td>
+                        <input type="text" class="form-control" id="CaregiverName" name="CaregiverName">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Physician</td>
+                    <td>
+                        <input type="text" class="form-control" id="Physician" name="Physician">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Card Exp. Date</td>
+                    <td>
+                        <input type="text" class="form-control" id="CardExpDate" name="CardExpDate" placeholder="mm/dd/year">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Birthday</td>
+                    <td>
+                        <input type="text" class="form-control" id="Birthday" name="Birthday" placeholder="mm/dd/year">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Street Address</td>
+                    <td>
+                        <input type="text" class="form-control" id="StreetAddress" name="StreetAddress">
+                    </td>
+                </tr>
+                <tr>
+                    <td>City</td>
+                    <td>
+                        <input type="text" class="form-control" id="City" name="City">
+                    </td>
+                </tr>
+                <tr>
+                    <td>State</td>
+                    <td>
+                        <input type="text" class="form-control" id="State" name="State">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Zip code</td>
+                    <td>
+                        <input type="text" class="form-control" id="Zipcode" name="Zipcode">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Resident</td>
+                    <td>
+                        <label class="radio-inline">
+                            <input type="radio" name="Resident" value="Resident">Resident
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="Non Resident" value="Non Resident">Non Resident
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Phone Number</td>
+                    <td>
+                        <input type="text" class="form-control" id="PhoneNumber" name="PhoneNumber" placeholder="(123)456-7890">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Phone Carrier</td>
+                    <td>
+                        <input type="text" class="form-control" id="PhoneCarrier" name="PhoneCarrier">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td>
+                        <input type="text" class="form-control" id="Email" name="Email" placeholder="patient@hotmail.com">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Joined At</td>
+                    <td>
+                        <input type="text" class="form-control" id="JoinedAt" name="JoinedAt" placeholder="mm/dd/year">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Drivers License Number</td>
+                    <td>
+                        <input type="text" class="form-control" id="DriversLicenseNumber" name="DriversLicenseNumber">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Last Visit Date</td>
+                    <td>
+                        <input type="text" class="form-control" id="LastVisitDate" name="LastVisitDate" placeholder="mm/dd/year">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Referrer</td>
+                    <td>
+                        <input type="text" class="form-control" id="Referrer" name="Referrer">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Last Visit Purchases</td>
+                    <td>
+                        <input type="text" class="form-control" id="LastVisitPurchases" name="LastVisitPurchases">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Total</td>
+                    <td>
+                        <input type="text" class="form-control" id="Total" name="Total">
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="col-md-4 col-md-offset-9">
+                <div class="btn-group" role="group" aria-label="...">
+                    <button type="submit" class="btn btn-success">Create</button>
+                    <a href="/patients" type="button" class="btn btn-warning">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </form>
+</section>

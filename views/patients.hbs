@@ -1,0 +1,18 @@
+<ul class="nav nav-pills">
+    <li role="presentation"><a href="/">Home</a></li>
+    <li role="presentation" class="active"><a href="#">Patients</a></li>
+    <li role="presentation"><a href="#">Products</a></li>
+</ul>
+
+
+<h1>All Patients</h1>
+
+<a href="/patient/insert" type="button" class="btn btn-primary">Add New Patient</a>
+
+<section class="get">
+    <ul>
+        {{# each items }}
+            <a href="/patient/get/{{ this._id }}" class="list-group-item"> {{ this.PatientName }} </a>
+        {{/each}}
+    </ul>
+</section>
