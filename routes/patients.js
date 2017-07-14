@@ -28,4 +28,12 @@ router.post('/search-phone', passportConf.isAuthenticated, function(req, res, ne
     })
 });
 
+router.post('/search-member-id', passportConf.isAuthenticated, function(req, res, next) {
+    var memberId = req.body.memberId;
+    Patient.find().where('CustomMembershipID').equals(memberId).select('PatientName CustomMembershipID PhoneNumber').exec(function (err, doc) {
+        if (err) return handleError(err);
+        res.render('patients', {items: doc});
+    })
+});
+
 module.exports = router;

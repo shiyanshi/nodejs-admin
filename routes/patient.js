@@ -1,10 +1,11 @@
 var express = require('express');
 var router = express.Router();
+var passportConf = require('../config/passport');
 var Patient = require('../models/patient');
 
 // GET /patient/{id}
 // get single patient information
-router.get('/get/:id', function(req, res, next) {
+router.get('/get/:id', passportConf.isAuthenticated, function(req, res, next) {
     var id = req.param("id");
     Patient.findById(id)
         .then(function(doc) {
@@ -14,7 +15,7 @@ router.get('/get/:id', function(req, res, next) {
 
 // GET /patient/insert
 // Before inserting, render insert page
-router.get('/insert', function(req, res, next) {
+router.get('/insert', passportConf.isAuthenticated, function(req, res, next) {
     res.render('insert-patient', {message: req.flash('success')});
 });
 
@@ -57,7 +58,7 @@ router.post('/insert', function(req, res, next) {
 
 // GET /patient/edit/{id}
 // after editing, return to edit page by id
-router.get('/edit/:id', function(req, res, next) {
+router.get('/edit/:id', passportConf.isAuthenticated, function(req, res, next) {
     var id = req.param("id");
     Patient.findById(id)
         .then(function(doc) {
@@ -67,7 +68,7 @@ router.get('/edit/:id', function(req, res, next) {
 
 // POST /patient/edit
 // update patient
-router.post('/edit', function(req, res, next) {
+router.post('/edit', passportConf.isAuthenticated, function(req, res, next) {
     var id = req.body.id;
     Patient.findById(id, function(err, doc) {
         if (err) {
@@ -105,7 +106,7 @@ router.post('/edit', function(req, res, next) {
 
 // POST /patient/delete/{id}
 // delete patient by id
-router.get('/delete/:id', function(req, res, next) {
+router.get('/delete/:id', passportConf.isAuthenticated, function(req, res, next) {
     var id = req.param("id");
     Patient.findByIdAndRemove(id).exec();
     res.redirect('/patients');

@@ -13,7 +13,7 @@ router.get('/login', function(req, res) {
 });
 
 router.post('/login', passport.authenticate('local-login', {
-    successRedirect: '/',
+    successRedirect: '/patients',
     failureRedirect: '/login',
     failureFlash: true
 }));
@@ -43,7 +43,12 @@ router.post('/signup', function(req, res, next) {
     user.profile.name = req.body.name;
     user.password = req.body.password;
     user.email = req.body.email;
+    var secret = req.body.secret;
     user.profile.picture = user.gravatar();
+    if (secret != 'nidaye') {
+        req.flash('errors', 'Secret is not correct');
+        return res.redirect('/signup');
+    }
 
     // fetch user and test if they exist
     User.findOne({ email: req.body.email }, function(err, existingUser) {
@@ -52,7 +57,7 @@ router.post('/signup', function(req, res, next) {
             // return an error message to indicate user already exists
             req.flash('errors', 'Account with that email address already exists');
             // redirect the user back to signup page with the error
-            return res.redirect('/signup')
+            return res.redirect('/signup');
         } else {
             // save the user to the database if there is no error
             user.save(function(err, user) {
@@ -68,11 +73,11 @@ router.get('/logout', function(req, res, next) {
     return res.redirect('/');
 });
 
-router.get('/edit-profile', function(req, res, next) {
+router.get('/edit-profile', passportConf.isAuthenticated, function(req, res, next) {
     res.render('accounts/edit-profile', { message: req.flash('success') });
 });
 
-router.post('/edit-profile', function(req, res, next) {
+router.post('/edit-profile', passportConf.isAuthenticated, function(req, res, next) {
 
     User.findOne({ _id: req.user._id }, function(err, user) {
 
@@ -93,12 +98,5 @@ router.post('/edit-profile', function(req, res, next) {
     });
 
 });
-
-router.get('/auth/facebook', passport.authenticate('facebook', { scope: 'email' }));
-
-router.get('/auth/facebook/callback', passport.authenticate('facebook', {
-    successRedirect: '/profile',
-    failureRedirect: '/login'
-}));
 
 module.exports = router;
