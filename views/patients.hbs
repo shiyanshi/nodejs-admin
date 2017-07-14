@@ -1,4 +1,7 @@
 <!-- Custom styles for this template -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 <link href="https://getbootstrap.com/examples/dashboard/dashboard.css" rel="stylesheet">
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -17,7 +20,7 @@
                 <li><a href="#">Dashboard</a></li>
                 <li><a href="#">Settings</a></li>
                 <li><a href="#">Profile</a></li>
-                <li><a href="#">Help</a></li>
+                <li><a href="/logout">Logout</a></li>
             </ul>
             <form class="navbar-form navbar-right">
                 <input type="text" class="form-control" placeholder="Search...">
@@ -48,10 +51,50 @@
                 <li><a href="">Another nav item</a></li>
             </ul>
         </div>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+
+
+
+        <div class="col-sm-9 col-sm-offset-2 col-md-10 col-md-offset-2 main">
             <h1 class="page-header">All Patients</h1>
+
+            <div>
             <a href="/patient/insert" type="button" class="btn btn-primary">Add New Patient</a>
-                <table class="table table-striped">
+            </div>
+            <br>
+
+            <form class="navbar-form navbar-left" role="search" action="/patients/search-name" method="post">
+                <h3>Full Name</h3>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="" id="name" name="name">
+                </div>
+                <button type="submit" class="btn btn-default">
+                    <span class="glyphicon glyphicon-search"></span>
+                </button>
+            </form>
+
+            <form class="navbar-form navbar-left" role="search" action="/patients/search-phone" method="post">
+                <h3>Phone Number</h3>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="" id="phoneNumber" name="phoneNumber">
+                </div>
+                <button type="submit" class="btn btn-default">
+                    <span class="glyphicon glyphicon-search"></span>
+                </button>
+            </form>
+
+            <form class="navbar-form navbar-left" role="search" action="/patients/search-member-id" method="post">
+                <h3>Membership ID</h3>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="" id="memberId" name="memberId">
+                </div>
+                <button type="submit" class="btn btn-default">
+                    <span class="glyphicon glyphicon-search"></span>
+                </button>
+            </form>
+
+
+
+            <table class="table table-striped">
                     <thead>
                     <tr>
                         <th>Patient Name</th>

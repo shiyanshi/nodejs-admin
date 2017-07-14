@@ -7,10 +7,15 @@ var bodyParser = require('body-parser');
 var stylus = require('stylus');
 var flash = require('express-flash');
 var session = require('express-session');
+var MongoStore = require('connect-mongo/es5')(session);
 var sessionstore = require('sessionstore');
+var passport = require('passport');
+
+// get the keys
+var secret = require('./config/secret');
 
 var index = require('./routes/index');
-var users = require('./routes/users');
+var user = require('./routes/user');
 var patients = require('./routes/patients');
 var patient = require('./routes/patient');
 
@@ -29,27 +34,26 @@ app.use(cookieParser());
 app.use(stylus.middleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 
+//middleware
 app.use(session({
     resave: true,
     saveUninitialized: true,
-    secret: "LKSJ&%$#XFE--yhan",
-    store: sessionstore.createSessionStore({
-        type: 'mongodb',
-        host: 'localhost',         // optional
-        port: 27017,               // optional
-        dbName: 'sessionDb',       // optional
-        collectionName: 'sessions',// optional
-        timeout: 10000             // optional
-        // authSource: 'authedicationDatabase',        // optional
-        // username: 'technicalDbUser',                // optional
-        // password: 'secret'                          // optional
-        // url: 'mongodb://user:pass@host:port/db?opts // optional
-    })
+    secret: secret.secretKey,
+    store: new MongoStore({url: secret.database, autoReconnect: true})
 }));
 app.use(flash());
 
+// make use of our passport module
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(function(req, res, next){
+    // assign each route the user object
+    res.locals.user = req.user;
+    next();
+});
+
 app.use('/', index);
-app.use('/users', users);
+app.use(user);
 app.use('/patients', patients);
 app.use('/patient', patient);
 
