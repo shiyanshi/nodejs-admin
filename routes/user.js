@@ -18,7 +18,7 @@ router.post('/login', passport.authenticate('local-login', {
     failureFlash: true
 }));
 
-router.get('/profile', passportConf.isAuthenticated, function(req, res, next) {
+/*router.get('/profile', passportConf.isAuthentficated, function(req, res, next) {
     User.findOne({ _id: req.user._id })
         .populate('history.item')
         .exec(function(err, foundUser) {
@@ -26,7 +26,7 @@ router.get('/profile', passportConf.isAuthenticated, function(req, res, next) {
 
             res.render('accounts/profile', { user: foundUser });
         });
-});
+});*/
 
 router.get('/signup', function(req, res, next) {
     res.render('accounts/signup', {

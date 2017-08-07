@@ -34,8 +34,8 @@
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
                 <li><a href="/">Overview</a></li>
-                <li class="active"><a href="/patients">Patients <span class="sr-only">(current)</span></a></li>
-                <li><a href="/product/all">Inventory</a></li>
+                <li><a href="/patients">Patients <span class="sr-only">(current)</span></a></li>
+                <li class="active"><a href="/product/all">Inventory <span class="sr-only">(current)</span></a></li>
                 <li><a href="#">Export</a></li>
             </ul>
             <ul class="nav nav-sidebar">
@@ -52,18 +52,17 @@
             </ul>
         </div>
 
-
-
         <div class="col-sm-9 col-sm-offset-2 col-md-10 col-md-offset-2 main">
-            <h1 class="page-header">All Patients</h1>
+            <h1 class="page-header">Inventory</h1>
 
             <div>
-            <a href="/patient/insert" type="button" class="btn btn-primary">Add New Patient</a>
+                <a href="/product/insert" type="button" class="btn btn-primary">Add New Product</a>
+                <a href="/order/insert" type="button" class="btn btn-primary">Place an order</a>
             </div>
             <br>
 
-            <form class="navbar-form navbar-left" role="search" action="/patients/search-name" method="post">
-                <h3>Full Name</h3>
+            <form class="navbar-form navbar-left" role="search" action="/product/search-id" method="post">
+                <h3>Product ID</h3>
                 <div class="form-group">
                     <input type="text" class="form-control" placeholder="" id="name" name="name">
                 </div>
@@ -72,51 +71,65 @@
                 </button>
             </form>
 
-            <form class="navbar-form navbar-left" role="search" action="/patients/search-member-id" method="post">
-                <h3>Membership ID</h3>
+            <form class="navbar-form navbar-left" role="search" action="/product/search-name" method="post">
+                <h3>Product Name</h3>
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="" id="memberId" name="memberId">
+                    <input type="text" class="form-control" placeholder="" id="productId" name="productId">
                 </div>
                 <button type="submit" class="btn btn-default">
                     <span class="glyphicon glyphicon-search"></span>
                 </button>
             </form>
 
-            <form class="navbar-form navbar-left" role="search" action="/patients/search-phone" method="post">
-                <h3>Phone Number</h3>
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="" id="phoneNumber" name="phoneNumber">
-                </div>
-                <button type="submit" class="btn btn-default">
-                    <span class="glyphicon glyphicon-search"></span>
-                </button>
-            </form>
-
-            <table class="table table-striped">
-                    <thead>
+            <table class="table table-striped" style="table-layout: fixed; width: 150%">
+                <thead>
+                    <col width="50">
+                    <col width="100">
+                    <col width="35">
+                    <col width="100">
                     <tr>
-                        <th>Patient Name</th>
-                        <th>Custom Membership ID</th>
-                        <th>Phone Number</th>
+                        <th>Image</th>
+                        <th>Product Name</th>
+                        <th>Quantity(oz)</th>
+                        <th>Prices</th>
                     </tr>
-                    </thead>
-                    <tbody>
-                    {{# each items }}
+                </thead>
+                <tbody>
+                {{# each items }}
                     <tr>
                         <td>
-                            <li><a href="/patient/get/{{ this._id }}"> {{ this.PatientName }}</a></li>
+                            <div class="col-md-1">
+                                <img src="{{ this.imagelink }}" alt="" height="45" width="45">
+                            </div>
+                        </td>
+                        <td style="word-wrap: break-word">
+                            <a href="/product/get/{{ this._id }}">{{ this.name }} </a>
                         </td>
                         <td>
-                            {{ this.CustomMembershipID }}
+                            {{ this.quantity_oz }}
                         </td>
                         <td>
-                            {{ this.PhoneNumber }}
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>1/8 oz</th>
+                                        <th>1/4 oz</th>
+                                        <th>1/2 oz</th>
+                                        <th>1 oz</th>
+                                    </tr>
+                                </thead>
+                                <tr>
+                                    <td>${{this.price_eighth_oz}}</td>
+                                    <td>${{this.price_quarter_oz}}</td>
+                                    <td>${{this.price_half_oz}}</td>
+                                    <td>${{this.price_one_oz}}</td>
+                                </tr>
+                            </table>
                         </td>
-
                     </tr>
-                    {{/each}}
-                    </tbody>
-                </table>
+                {{/each}}
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
